@@ -1,0 +1,6 @@
+venv
+venv/*
+*.jsonl
+Modelfile
+chroma_db
+chroma_db/*
