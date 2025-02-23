@@ -1,11 +1,11 @@
-# Automation Logs
+# Hailey - AI analysis of test automation
 
 ## Overview
 This repository contains tools and models for analyzing and reporting on test automation logs. It includes utilities for extracting keywords from queries, querying a ChromaDB database, and providing insights into test case failures.
 
 ## Directory Structure
 ```
-/Users/nsin/Code/github/automation-logs
+Hailey
 ├── modelfile
 │   └── report
 │       └── Modelfile
@@ -33,8 +33,8 @@ This repository contains tools and models for analyzing and reporting on test au
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/automation-logs.git
-    cd automation-logs
+    https://github.com/Sin-Nguyen/Hailey.git
+    cd Hailey
     ```
 
 2. Install the required Python packages:
