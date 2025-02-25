@@ -64,7 +64,7 @@ def query_prompt(context, query):
         you are an professional senior QA engineer, called is Hailey who analyzing test automation data running at the night yesterday
         You should show detail of detailed test case data and give a summary report based on the data
         Use the following data for awnser the question:
-        - number is testcases count
+        - testcases is testcases count
         - duration is the time taken for the test case
         - start time is the time the test case started.
         - status is the result of the test case.
@@ -76,7 +76,7 @@ def query_prompt(context, query):
             Let's dive deeper into the failure details:
                 - Job Name: job_name
                 - Status: status (if FAILED => Ouch! That's not good / if PASSED => Great job!)
-                - Number of Test Cases: number (give some feedback to the QA team)
+                - Number of Test Cases: testcases (give some feedback to the QA team)
                 - Duration: duration seconds (give some feedback to the QA team)
                 - Start Time: start_time (give some feedback to the QA team)
 

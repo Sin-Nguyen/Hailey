@@ -48,7 +48,7 @@ with open("data.jsonl", "r") as f:
         # Extract and clean data
         name = clean_value(data.get("name"), "Unknown Name")
         status = clean_value(data.get("status"), "Unknown Status")
-        number = clean_value(data.get("number"), 0)  # Use 0 for numbers
+        testcases = clean_value(data.get("testcases"), 0)  # Use 0 for testcases
         duration = clean_value(data.get("duration"), 0)
         start_time = convert_timestamp(clean_value(data.get("start_time"), 0))  # Convert timestamp
 
@@ -62,7 +62,7 @@ with open("data.jsonl", "r") as f:
             metadatas=[{
                 "name": name,
                 "status": status,
-                "number": number,
+                "testcases": testcases,
                 "duration": duration,
                 "start_time": start_time  # Include new key
             }]

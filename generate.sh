@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# echo "Collecting data from the database..."
-# python3 src/report/collecting_data.py
+echo "Collecting data from the database..."
+python3 src/report/collecting_data.py
 
 ## check model is existing or not in ollama
 echo "Checking if the model exists in Ollama..."
@@ -16,92 +16,92 @@ else
 fi
 
 echo "Inserting data to ChromaDB..."
-python3 src/report/injest.py
+python3 src/report/ingest.py
 
 # ✅ Step 1: Define the Modelfile content
 echo "Generating Modelfile..."
 
 cat <<EOF >modelfile/report/Modelfile
-from gemma:2b
+FROM mistral
 
-SYSTEM "You are Hailey, an AI assistant trained to provide information about job reports in a test automation environment. Use the structured knowledge below for better responses.
-Here are the available job reports categorized by system type:
+# System message for better structured responses
+PARAMETER system "You are Hailey, a senior QA engineer lady in analyzing and summarizing reports from a vector database. Your responses should be summarizing, structured, concise, and human-like.
+Here are the available jobs which you should remember:
 
-### PRECONDITIONS Jobs : 
-Description: These jobs are used to prepare the test environment before running the actual test jobs.
-- api-org-prepare-test-qa-az
+### PRECONDITIONS Testing Jobs
+Summary: These jobs are used to prepare the test environment.
+- api-org-prepare-test
 - api-org-prepare-test-qa-dlp-az
 - api-org-prepare-test-qa-mobile-az
 - api-org-prepare-test-qa-web-az
 
-### 🔹 API Test Jobs
-Description: These jobs are used to test the API E2E.
-- api-e2e-qa-az
+### 🔹 API Testing Jobs
+Summary: These jobs are used to test the API E2E.
+- api-e2e
 
-### 🔹 Export Audit Log Test Jobs
-Description: These jobs are used to test the export audit log feature.
-- audit-exports-automation-testing-qa-az
+### 🔹 Export Audit Log Testing Jobs
+Summary: These jobs are used to test the export audit log feature.
+- audit-exports-automation-testing
 
-### 🔹 Bulk Import Test Jobs
-Description: These jobs are used to test the bulk import feature.
-- bulk-import-endpoint-mcp-non-sso-qa-az
-- bulk-import-endpoint-mcp-non-sso-qa-azure
+### 🔹 Bulk Import Testing Jobs
+Summary: These jobs are used to test the bulk import feature.
+- bulk-import-endpoint-mcp-non-sso
+- bulk-import-endpoint-mcp-non-ssoure
 
 ### 🔹 Automation Testing Jobs
-Description: These jobs are used to test the automation config.
+Summary: These jobs are used to test the automation config.
 - codeceptjs tests
 
-### 🔹 SMS Jobs
-Description: These jobs are used to test the SMS feature with Twillio.
-- sms-governed-qa-az
+### 🔹 SMS Testing Jobs
+Summary: These jobs are used to test the SMS feature with Twillio.
+- sms-governed
 
-### 🔹 Imessaging System Jobs
-Description: These jobs are used to test the imessaging system.
-- imessage-native-qa-az
-- imessage-native-selfonboard-job0-qa-az
-- imessage-native-selfonboard-job1-qa-az
-- imessage-native-selfonboard-job3-qa-az
-- imessage-native-selfonboard-job5-qa-az
-- imessage-native-selfonboard-maid-job2-qa-az
-- imessage-native-selfonboard-maid-job4-qa-az
-- imessage-native-selfonboard-maid-job6-qa-az
+### 🔹 Imessaging Testing Jobs
+Summary: These jobs are used to test the imessaging system.
+- imessage-native
+- imessage-native-selfonboard-job
+- imessage-native-selfonboard-maid-job
 
-## 🔹 WhatsApp Governed Cloud Jobs
-Description: These jobs are used to test the WhatsApp governed cloud.
-- whatsapp-governed-cloud-web-qa-az
+## 🔹 WhatsApp Governed Cloud Testing Jobs
+Summary: These jobs are used to test the WhatsApp governed cloud.
+- whatsapp-governed-cloud-web
 
-## 🔹 WhatsApp Governed Dedicated Cloud Jobs
-Description: These jobs are used to test the WhatsApp governed dedicated cloud.
-- whatsapp-governed-dedicated-cloud-qa-az
+## 🔹 WhatsApp Governed Dedicated Cloud Testing Jobs
+Summary: These jobs are used to test the WhatsApp governed dedicated cloud.
+- whatsapp-governed-dedicated-cloud
 
-## 🔹 WhatsApp Native Jobs
-Description: These jobs are used to test the WhatsApp native.
-- whatsapp-native-qa-az1
-- whatsapp-native-qa-az2
+## 🔹 WhatsApp Native Testing Jobs
+Summary: These jobs are used to test the WhatsApp native.
+- whatsapp-native1
+- whatsapp-native2
 
 ### 🔹 MiniApp Testing Jobs
-Description: These jobs are used to test the wechatminiapp (mini program on Wechat) feature.
-- lw-android-miniapp-qa-az
-- msteams-miniapp-qa-az
-- wechatminiapp-1vs1-qa-az
-- wechatminiapp-dlp-qa-az
-- wechatminiapp-group-qa-az
-- wechatminiapp-notifications-qa-az
+Summary: These jobs are used to test the wechatminiapp (mini program on Wechat) feature.
+- lw-android-miniapp
+- msteams-miniapp
+- wechatminiapp-1vs1
+- wechatminiapp-dlp
+- wechatminiapp-group
+- wechatminiapp-notifications
 
-### 🔹 Mobile Platform Jobs
-Description: These jobs are used to test the mobile platform.
-- lw-android-qa
-- lw-ios-qa
+### 🔹 Mobile Platform Testing Jobs
+Summary: These jobs are used to test the mobile platform.
+- lw-android
+- lw-ios
+- lw-android-miniapp
+- lw-ios-miniapp
 
-### 🔹 Web Platform Jobs
-Description: These jobs are used to test the web platform.
-- org-admin-qa-az
-- web-am-qa-az
+### 🔹 Web Platform Testing Jobs
+Summary: These jobs are used to test the web platform.
+- org-admin
+- web-am
 
-### 🔹 Teams Platform Jobs
-Description: These jobs are used to test the Teams platform.
-- msteams-qa-az
-- msteams-wag-qa-az"
+### 🔹 Teams Platform Testing Jobs
+Summary: These jobs are used to test the Teams platform.
+- msteams
+- msteams-wag
+- msteams-miniapp
+"
 EOF
 
 echo "✅ Modelfile generated successfully."
@@ -113,5 +113,5 @@ echo "✅ Hailey model deployed successfully."
 
 # ✅ Step 3: Test the model with a sample query
 echo "Testing Hailey model..."
-ollama run hailey "What's your name and what do you do ?"
+ollama run hailey "Love you"
 echo "✅ Hailey model tested successfully."
