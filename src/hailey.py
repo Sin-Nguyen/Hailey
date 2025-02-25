@@ -18,8 +18,8 @@ def format_retrieved_data(retrieved_docs):
         return "No relevant information found in the database."
 
     formatted_context = "\n".join([
-        f"- Name: {doc.get('name', 'Unknown')}, Status: {doc.get('status', 'Unknown')}, "
-        f"Number: {doc.get('number', 'Unknown')}, Duration: {doc.get('duration', 'Unknown')}, "
+        f"-Name: {doc.get('name', 'Unknown')}, Status: {doc.get('status', 'Unknown')}, "
+        f"Number: {doc.get('testcases', 'Unknown')}, Duration: {doc.get('duration', 'Unknown')}, "
         f"Start Time: {doc.get('start_time', 'Unknown')}"
         for doc in retrieved_docs
     ])
