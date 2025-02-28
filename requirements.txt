@@ -5,3 +5,5 @@ psycopg2
 langchain
 langchain_core
 langchain_community
+requests
+tqdm
